@@ -35,14 +35,5 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
           sudo curl https://rclone.org/install.sh | sudo bash
-          sudo cat <<EOF >> $(rclone config file | tail -n 1)
-          [putio]
-          type = putio
-          token = ${{ secrets.TOKEN }}
-          [dropbox]
-          type = dropbox
-          client_id = ${{ secrets.CLIENT_ID2 }}
-          client_secret = ${{ secrets.CLIENT_SECRET2 }}
-          token = ${{ secrets.TOKEN2 }}
-          EOF
-          rclone ls dropbox: -P -v --stats-one-line --stats=5s
+          sudo cat ${{ secrets.RCLONE }} > rclone.conf
+          rclone --config rclone.conf ls dropbox: -P -v --stats-one-line --stats=5s
