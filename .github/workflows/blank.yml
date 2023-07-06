@@ -35,5 +35,5 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
           sudo curl https://rclone.org/install.sh | sudo bash
-          sudo cat ${{ secrets.RCLONE }} > rclone.conf
+          sudo echo ${{ secrets.RCLONE }} > rclone.conf
           rclone --config rclone.conf ls dropbox: -P -v --stats-one-line --stats=5s
